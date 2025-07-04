@@ -12,7 +12,7 @@ Bu proje, Flutter ile geliştirilmiş, kullanıcıların toplam bakiyelerini ve 
 -  AlertDialog içinden “Hata Bildir” seçeneği
 -  Alt navigasyon çubuğu (Hesabım, İşlemler, Döviz Kuru, Ayarlar)
 
-## 📁 Kullanılan Teknolojiler
+##  Kullanılan Teknolojiler
 
 - Flutter 3+
 - Dart
