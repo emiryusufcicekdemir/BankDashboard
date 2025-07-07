@@ -107,7 +107,7 @@ class _DashboardScreenState extends State<DashboardScreen>
     setState(() {
       _selectedIndex = index;
     });
-    // Gelecekte sayfa yönlendirmeleri buraya eklenebilir.
+    // sayfa yönlendirmeleri buraya
   }
 
   @override
@@ -141,7 +141,7 @@ class _DashboardScreenState extends State<DashboardScreen>
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // FR1: Profil Alanı
+              // Profil
               Row(
                 children: [
                   const CircleAvatar(
@@ -158,7 +158,7 @@ class _DashboardScreenState extends State<DashboardScreen>
               ),
               const SizedBox(height: 20),
 
-              // FR2: Bakiye Kartı
+              // Bakiye Kartı
               Card(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
@@ -198,7 +198,7 @@ class _DashboardScreenState extends State<DashboardScreen>
               ),
               const SizedBox(height: 20),
 
-              // FR3: Filtre Butonları
+              // Filtre Butonları
               SizedBox(
                 width: double.infinity,
                 child: Row(
@@ -234,7 +234,7 @@ class _DashboardScreenState extends State<DashboardScreen>
               ),
               const SizedBox(height: 12),
 
-              // FR3: İşlem Listesi
+              // işlem Listesi
               const Text(
                 'Son İşlemler',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
