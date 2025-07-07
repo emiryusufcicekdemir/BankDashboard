@@ -14,7 +14,7 @@ Bu proje, Flutter ile geliştirilmiş, kullanıcıların toplam bakiyelerini ve 
 
 ##  Kullanılan Teknolojiler
 
-- Flutter 3+
+- Flutter
 - Dart
 - Stateful & Stateless Widget yapıları
 - Asset yönetimi (`assets/profile.png`)
