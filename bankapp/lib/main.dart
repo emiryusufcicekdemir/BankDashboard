@@ -23,8 +23,7 @@ class DashboardScreen extends StatefulWidget {
   State<DashboardScreen> createState() => _DashboardScreenState();
 }
 
-class _DashboardScreenState extends State<DashboardScreen>
-    with SingleTickerProviderStateMixin {
+class _DashboardScreenState extends State<DashboardScreen> {
   String selectedFilter = 'Tümü';
 
   final List<Map<String, dynamic>> transactions = [
@@ -107,7 +106,6 @@ class _DashboardScreenState extends State<DashboardScreen>
     setState(() {
       _selectedIndex = index;
     });
-    // sayfa yönlendirmeleri buraya
   }
 
   @override
@@ -141,7 +139,6 @@ class _DashboardScreenState extends State<DashboardScreen>
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Profil
               Row(
                 children: [
                   const CircleAvatar(
@@ -157,8 +154,6 @@ class _DashboardScreenState extends State<DashboardScreen>
                 ],
               ),
               const SizedBox(height: 20),
-
-              // Bakiye Kartı
               Card(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
@@ -197,8 +192,6 @@ class _DashboardScreenState extends State<DashboardScreen>
                 ),
               ),
               const SizedBox(height: 20),
-
-              // Filtre Butonları
               SizedBox(
                 width: double.infinity,
                 child: Row(
@@ -233,43 +226,60 @@ class _DashboardScreenState extends State<DashboardScreen>
                 ),
               ),
               const SizedBox(height: 12),
-
-              // işlem Listesi
               const Text(
                 'Son İşlemler',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
               Expanded(
-                child: ListView.builder(
-                  itemCount: filteredTransactions.length,
-                  itemBuilder: (context, index) {
-                    final tx = filteredTransactions[index];
-                    return Card(
-                      child: ListTile(
-                        onTap: () => _showTransactionDetails(tx),
-                        leading: Icon(
-                          tx['type'] == 'gelen'
-                              ? Icons.arrow_downward
-                              : Icons.arrow_upward,
-                          color:
-                              tx['type'] == 'gelen' ? Colors.green : Colors.red,
-                        ),
-                        title: Text(tx['description']),
-                        subtitle: Text(tx['date']),
-                        trailing: Text(
-                          '₺ ${tx['amount'].toStringAsFixed(2)}',
-                          style: TextStyle(
+                child: AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 400),
+                  transitionBuilder: (child, animation) {
+                    final offsetAnimation = Tween<Offset>(
+                      begin: const Offset(0.0, 0.1),
+                      end: Offset.zero,
+                    ).animate(animation);
+                    return FadeTransition(
+                      opacity: animation,
+                      child: SlideTransition(
+                        position: offsetAnimation,
+                        child: child,
+                      ),
+                    );
+                  },
+                  child: ListView.builder(
+                    key: ValueKey(selectedFilter),
+                    itemCount: filteredTransactions.length,
+                    itemBuilder: (context, index) {
+                      final tx = filteredTransactions[index];
+                      return Card(
+                        child: ListTile(
+                          onTap: () => _showTransactionDetails(tx),
+                          leading: Icon(
+                            tx['type'] == 'gelen'
+                                ? Icons.arrow_downward
+                                : Icons.arrow_upward,
                             color:
                                 tx['type'] == 'gelen'
                                     ? Colors.green
                                     : Colors.red,
-                            fontWeight: FontWeight.bold,
+                          ),
+                          title: Text(tx['description']),
+                          subtitle: Text(tx['date']),
+                          trailing: Text(
+                            '₺ ${tx['amount'].toStringAsFixed(2)}',
+                            style: TextStyle(
+                              color:
+                                  tx['type'] == 'gelen'
+                                      ? Colors.green
+                                      : Colors.red,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
-                      ),
-                    );
-                  },
+                      );
+                    },
+                  ),
                 ),
               ),
             ],
